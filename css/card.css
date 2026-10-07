@@ -1,0 +1,308 @@
+/* Карточка события. Вопросы «Когда?» и «Где?» написаны красной ручкой,
+   как их пишет на полях учитель; ответы — печатным шрифтом учебника */
+
+.card {
+  grid-area: card;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-left: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+/* Прокручивается всё, кроме кнопок «Раньше» и «Позже»: рассказ на «5»
+   длинный, а листать события нужно и не дочитав до конца */
+.card__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.card__body {
+  padding: 14px 22px 0;
+}
+
+.card__after {
+  padding: 0 22px 16px;
+}
+
+.card__back {
+  min-height: 36px;
+  margin: 0 0 10px -10px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.card__back:hover {
+  background: var(--grid);
+}
+
+.card__back:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 0;
+}
+
+.card__paragraph {
+  margin: 0 0 8px;
+  font-family: var(--font-hand);
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--pen-red);
+}
+
+/* Подсказка под заголовком параграфа: что делать дальше */
+.card__hint {
+  margin: -6px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.card__mode {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  margin: 4px 0 16px;
+  padding: 6px 12px;
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.card__mode:hover {
+  background: var(--grid);
+}
+
+.card__mode:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.card__era {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.card__era-mark {
+  flex: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--era-color);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+
+.card__title:focus {
+  outline: none;
+}
+
+.card__title {
+  margin: 0 0 16px;
+  font-family: var(--font-title);
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.card__facts {
+  margin: 0;
+}
+
+.card__fact {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr);
+  column-gap: 10px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-top: 1px solid var(--grid);
+}
+
+.card__fact:last-child {
+  border-bottom: 1px solid var(--grid);
+}
+
+.card__question {
+  grid-row: span 2;
+  font-family: var(--font-hand);
+  font-size: 21px;
+  line-height: 1.2;
+  color: var(--pen-red);
+}
+
+.card__answer {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.card__detail {
+  grid-column: 2;
+  margin: 2px 0 0;
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--ink-soft);
+}
+
+.card__neighbours {
+  margin-bottom: 8px;
+}
+
+.card__neighbours-title {
+  margin: 0 0 6px;
+  font-family: var(--font-hand);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--pen-red);
+}
+
+.card__neighbour-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card__neighbour-link {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr);
+  column-gap: 8px;
+  align-items: baseline;
+  width: 100%;
+  padding: 5px 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.card__neighbour-link:hover .card__neighbour-title {
+  text-decoration-color: var(--ink);
+}
+
+/* Событие, которое сейчас открыто: в списке оно стоит, но не ссылкой */
+.card__neighbour-link--current {
+  box-sizing: border-box;
+  cursor: default;
+}
+
+.card__neighbour-link--current .card__neighbour-title {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.card__neighbour-link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+
+.card__neighbour-mark {
+  grid-row: span 2;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--era-color);
+  box-shadow: inset 0 0 0 1px var(--ink-edge);
+}
+
+.card__neighbour-when {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.card__neighbour-title {
+  grid-column: 2;
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+}
+
+.card__nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px 14px;
+  border-top: 1px solid var(--rule);
+}
+
+/* display: flex выше перебивает браузерное правило для hidden */
+.card__nav[hidden] {
+  display: none;
+}
+
+.card__step {
+  flex: 1;
+  min-height: 44px;
+  padding: 0 8px;
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.card__step--forward {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.card__step:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.card__step:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.card__counter {
+  flex: none;
+  min-width: 62px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .card {
+    border-top: 2px solid var(--ink);
+    border-left: 0;
+  }
+
+  .card__scroll {
+    overflow-y: visible;
+  }
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!-- Страница собрана: npm run build:pages. Правь tools/hub-template.html и tools/build-pages.mjs, а не этот файл -->
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Что задали? Параграфы учебника коротко и на оценку</title>
+  <meta name="description" content="Выбери класс, предмет и параграф, который задали. Сайт коротко перескажет параграф и подскажет, как рассказать его на «3», на «4» и на «5».">
+  <!-- Пустая иконка: без неё браузер сам запрашивает /favicon.ico и пишет в консоль 404 -->
+  <link rel="icon" href="data:,">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Neucha&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/page.css">
+  <link rel="stylesheet" href="css/hub.css">
+  <link rel="stylesheet" href="css/class-nav.css">
+  <link rel="stylesheet" href="css/class-list.css">
+  <link rel="stylesheet" href="css/subject-list.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <!-- Скриптов нет: страница выбора — это ссылки, она открывается и без JavaScript -->
+</head>
+<body class="page">
+  <div class="hub">
+    <main class="hub__sheet">
+
+      <h1 class="hub__title">Какой у тебя класс?</h1>
+      <p class="hub__lead">Выбери класс, потом предмет и параграф, который задали. Сайт коротко перескажет параграф и подскажет, как рассказать его на «3», на «4» и на «5».</p>
+      <ul class="class-list">
+        <li class="class-list__item">
+          <a class="class-list__link" href="5-klass.html">
+            <span class="class-list__number">5</span>
+            <span class="class-list__word">класс</span>
+            <span class="class-list__note">история</span>
+          </a>
+        </li>
+        <li class="class-list__item">
+          <a class="class-list__link" href="6-klass.html">
+            <span class="class-list__number">6</span>
+            <span class="class-list__word">класс</span>
+            <span class="class-list__note">история</span>
+          </a>
+        </li>
+        <li class="class-list__item">
+          <a class="class-list__link" href="7-klass.html">
+            <span class="class-list__number">7</span>
+            <span class="class-list__word">класс</span>
+            <span class="class-list__note">история</span>
+          </a>
+        </li>
+        <li class="class-list__item">
+          <a class="class-list__link" href="8-klass.html">
+            <span class="class-list__number">8</span>
+            <span class="class-list__word">класс</span>
+            <span class="class-list__note">история</span>
+          </a>
+        </li>
+        <li class="class-list__item">
+          <a class="class-list__link class-list__link--empty" href="9-klass.html">
+            <span class="class-list__number">9</span>
+            <span class="class-list__word">класс</span>
+            <span class="class-list__note">пока пусто</span>
+          </a>
+        </li>
+        <li class="class-list__item">
+          <a class="class-list__link class-list__link--empty" href="10-klass.html">
+            <span class="class-list__number">10</span>
+            <span class="class-list__word">класс</span>
+            <span class="class-list__note">пока пусто</span>
+          </a>
+        </li>
+        <li class="class-list__item">
+          <a class="class-list__link class-list__link--empty" href="11-klass.html">
+            <span class="class-list__number">11</span>
+            <span class="class-list__word">класс</span>
+            <span class="class-list__note">пока пусто</span>
+          </a>
+        </li>
+      </ul>
+    </main>
+    <footer class="footer">
+      <p class="footer__line">Рассказы на сайте написаны своими словами, это не текст учебника.</p>
+      <p class="footer__line">Сайт не спрашивает имён и ничего о вас не хранит. В браузере запоминается только выбранная оценка. Шрифты загружаются с сервера Google Fonts.</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+/* Подвал: по какому учебнику сайт и что он делает с данными посетителя */
+
+.footer {
+  padding: 16px 16px 28px;
+  border-top: 1px solid var(--rule);
+}
+
+.footer__line {
+  max-width: 760px;
+  margin: 0 0 6px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}

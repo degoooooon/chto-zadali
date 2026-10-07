@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- Страница собрана: npm run build:pages. Правь tools/hub-template.html и tools/build-pages.mjs, а не этот файл -->
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>6 класс: выбери предмет</title>
+  <meta name="description" content="Предметы 6 класса: история. Выбери предмет и параграф, который задали.">
+  <!-- Пустая иконка: без неё браузер сам запрашивает /favicon.ico и пишет в консоль 404 -->
+  <link rel="icon" href="data:,">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Neucha&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/page.css">
+  <link rel="stylesheet" href="css/hub.css">
+  <link rel="stylesheet" href="css/class-nav.css">
+  <link rel="stylesheet" href="css/class-list.css">
+  <link rel="stylesheet" href="css/subject-list.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <!-- Скриптов нет: страница выбора — это ссылки, она открывается и без JavaScript -->
+</head>
+<body class="page">
+  <div class="hub">
+    <main class="hub__sheet">
+      <nav class="class-nav hub__crumbs" aria-label="Назад">
+        <a class="class-nav__link" href="index.html">← Все классы</a>
+      </nav>
+      <h1 class="hub__title">6 класс</h1>
+      <p class="hub__lead">Выбери предмет, по которому задали параграф.</p>
+      <ul class="subject-list">
+        <li class="subject-list__item">
+          <a class="subject-list__link" href="6-klass-istoriya.html">
+            <span class="subject-list__name">История</span>
+            <span class="subject-list__book">Средние века</span>
+          </a>
+        </li>
+        <li class="subject-list__item">
+          <a class="subject-list__link" href="6-klass-istoriya-rossii.html">
+            <span class="subject-list__name">История</span>
+            <span class="subject-list__book">Россия</span>
+          </a>
+        </li>
+      </ul>
+    </main>
+    <footer class="footer">
+      <p class="footer__line">Рассказы на сайте написаны своими словами, это не текст учебника.</p>
+      <p class="footer__line">Сайт не спрашивает имён и ничего о вас не хранит. В браузере запоминается только выбранная оценка. Шрифты загружаются с сервера Google Fonts.</p>
+    </footer>
+  </div>
+</body>
+</html>

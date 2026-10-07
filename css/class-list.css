@@ -1,0 +1,107 @@
+/* Плитки классов. Стоят на главной и на странице класса, для которого
+   ещё ничего нет: там показаны классы, где параграфы уже есть */
+
+.class-list {
+  display: grid;
+  /* Плитка — четыре клетки листа, промежуток — одна (см. hub.css).
+     Семь колонок — по числу классов в js/data/school-classes.js: все в один
+     ряд. С auto-fill в окне чуть уже 960px седьмая плитка уезжала на вторую
+     строку одна. Классов станет больше — лишние сами встанут вторым рядом */
+  grid-template-columns: repeat(7, minmax(0, 96px));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Плитки одного ряда равны по высоте: на узком телефоне «пока пусто»
+   переносится на вторую строку, и без этого плитка 7 класса была бы
+   выше соседних */
+.class-list__item {
+  display: flex;
+}
+
+.class-list__link {
+  /* Цвет подписи под номером: красная ручка там, где есть что открыть */
+  --note-color: var(--pen-red);
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Содержимое прижато к верху, а не стоит по центру: иначе у плитки
+     с подписью в две строки цифра выше, чем у соседней */
+  box-sizing: border-box;
+  min-height: 120px;
+  padding: 18px 4px 10px;
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.class-list__link:hover {
+  background: var(--grid);
+}
+
+.class-list__link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* Класс, для которого ещё ничего нет. Плитка остаётся ссылкой: на странице
+   класса сказано, что пусто, и показано, куда можно пойти. Серым пишем
+   не --ink-faint: на мелкой подписи ему не хватает контраста */
+.class-list__link--empty {
+  --note-color: var(--ink-soft);
+
+  border-style: dashed;
+  border-color: var(--ink-faint);
+  color: var(--ink-soft);
+}
+
+.class-list__number {
+  font-family: var(--font-title);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.class-list__word {
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--ink-soft);
+}
+
+.class-list__note {
+  margin-top: 6px;
+  font-family: var(--font-hand);
+  font-size: 17px;
+  line-height: 1.1;
+  color: var(--note-color);
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  /* Четыре в ряд: семь классов встают в два ряда, и все видны без прокрутки.
+     На телефоне плитка уже 96px, сколько даст экран; на планшете
+     упирается в 96px и не растягивается в полосу */
+  .class-list {
+    grid-template-columns: repeat(4, minmax(0, 96px));
+    gap: 12px 8px;
+  }
+
+  .class-list__link {
+    min-height: 108px;
+    padding-top: 15px;
+  }
+
+  .class-list__number {
+    font-size: 34px;
+  }
+
+  .class-list__note {
+    font-size: 16px;
+  }
+}

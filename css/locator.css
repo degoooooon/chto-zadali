@@ -1,0 +1,51 @@
+/* Мини-карта в углу: показывает, какой кусок мира сейчас на экране */
+
+.locator {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  width: 150px;
+  overflow: hidden;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  background: var(--sea);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.locator--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.locator__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.locator__land {
+  fill: var(--paper);
+  fill-rule: evenodd;
+}
+
+.locator__frame {
+  fill: rgba(194, 47, 61, 0.14);
+  stroke: var(--pen-red);
+  stroke-width: 2px;
+  vector-effect: non-scaling-stroke;
+}
+
+@media (max-width: 860px) {
+  .locator {
+    width: 104px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .locator {
+    transition: none;
+  }
+}

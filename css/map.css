@@ -1,0 +1,134 @@
+.map {
+  position: relative;
+  grid-area: map;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--sea);
+}
+
+.map__viewport {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  /* Без этого палец на карте прокручивает страницу, а карта стоит на месте */
+  touch-action: none;
+}
+
+.map__viewport--dragging {
+  cursor: grabbing;
+}
+
+.map__svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* non-scaling-stroke у всех линий: при приближении в десять раз
+   берег иначе превращается в полосу толщиной с Крит */
+
+.map__graticule {
+  fill: none;
+  stroke: var(--graticule);
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+
+.map__shore {
+  fill: none;
+  stroke: var(--shore);
+  stroke-width: 7px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.map__land {
+  fill: var(--paper);
+  /* evenodd вырезает внутренние контуры: без него Каспийское море закрашено сушей */
+  fill-rule: evenodd;
+  stroke: var(--coast);
+  stroke-width: 1px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.map__river {
+  fill: none;
+  stroke: var(--river);
+  stroke-width: 0.8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.65;
+}
+
+.map__river--major {
+  stroke-width: 2px;
+  opacity: 1;
+}
+
+.map__markers {
+  position: absolute;
+  inset: 0;
+}
+
+/* Подсказка появляется, когда точки на карте слиплись */
+.map__hint {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  margin: 0;
+  padding: 6px 12px 7px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper);
+  box-shadow: 2px 2px 0 var(--ink-shadow);
+  font-size: 14px;
+  line-height: 1.3;
+  text-align: center;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.map__status {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-sizing: border-box;
+  width: min(440px, calc(100% - 32px));
+  margin: 0;
+  padding: 14px 18px;
+  border: 1px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  font-size: 15px;
+  transform: translate(-50%, -50%);
+}
+
+.map__status--error {
+  border-color: var(--pen-red);
+  border-width: 2px;
+}
+
+@media (max-width: 860px) {
+  /* Меньше половины экрана: под картой должны быть видны заголовок
+     события и ответы «когда» и «где», иначе непонятно, что нажатие сработало */
+  .map {
+    flex: none;
+    height: 46vh;
+    min-height: 280px;
+  }
+
+  .map__hint {
+    border-radius: 12px;
+    font-size: 13px;
+  }
+}

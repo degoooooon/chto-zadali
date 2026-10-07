@@ -1,0 +1,17 @@
+.page {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Сообщение для тех, у кого выключен JavaScript */
+.page__notice {
+  margin: 0;
+  padding: 14px 16px;
+  border-bottom: 2px solid var(--pen-red);
+  font-size: 16px;
+}

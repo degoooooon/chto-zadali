@@ -1,0 +1,265 @@
+/* Лента времени на тетрадном листе. Ширину клетки (--cell) ставит скрипт,
+   а сколько лет в клетке, решает класс: сто у Древнего мира, пять
+   у XVIII века. Красная линия полей стоит на границе эр */
+
+.timeline {
+  grid-area: timeline;
+  min-width: 0;
+  padding-top: 8px;
+  border-top: 2px solid var(--ink);
+  background: var(--paper);
+}
+
+.timeline__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 16px;
+  padding: 0 16px;
+}
+
+.timeline__title {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.timeline__note {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--ink-soft);
+}
+
+.timeline__scroller {
+  /* Запас сверху под подсказку: прокручиваемый блок обрезает всё,
+     что выходит за его край, и подсказка у верхних точек теряла шапку */
+  padding-top: 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.timeline__track {
+  position: relative;
+}
+
+.timeline__plot {
+  position: relative;
+  border-bottom: 2px solid var(--ink);
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to top, var(--grid) 1px, transparent 1px);
+  background-position: left bottom;
+  background-size: var(--cell) var(--cell);
+}
+
+/* Зона первобытности заштрихована карандашом: масштаб здесь другой */
+.timeline__zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent 0 6px,
+    var(--ink-hatch) 6px 7px
+  );
+}
+
+/* Зигзаг — знак разрыва шкалы, как на оси графика.
+   Цвет линии %231b2440 — это --ink, см. пометку в tokens.css */
+.timeline__break {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  margin-left: -5px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='14'%3E%3Cpath d='M2 0l6 7-6 7' fill='none' stroke='%231b2440' stroke-width='1.5'/%3E%3C/svg%3E") repeat-y,
+    var(--paper);
+}
+
+.timeline__zone-caption {
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  font-family: var(--font-hand);
+  font-size: 14px;
+  line-height: 1;
+  color: var(--ink-soft);
+}
+
+.timeline__epoch {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--margin-line);
+}
+
+.timeline__side {
+  position: absolute;
+  top: 5px;
+  font-family: var(--font-hand);
+  font-size: 17px;
+  line-height: 1;
+  color: var(--pen-red);
+  white-space: nowrap;
+}
+
+.timeline__guide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--ink);
+  opacity: 0.45;
+}
+
+/* Выбран период: вместо линии полоса во всю его длину */
+.timeline__guide--band {
+  opacity: 0.1;
+}
+
+/* Метка события: кружок у точной даты, полоска у периода. Ширину ставит
+   скрипт, высота приходит из --mark-size (js/timeline/timeline.js) */
+.timeline__mark {
+  position: absolute;
+  box-sizing: border-box;
+  height: var(--mark-size);
+  min-width: var(--mark-size);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: calc(var(--mark-size) / 2);
+  background: var(--era-color);
+  /* Внутренний ободок делает жёлтую метку видимой на белом,
+     внешний белый разделяет метки, вставшие вплотную */
+  box-shadow:
+    inset 0 0 0 1px var(--ink-edge),
+    0 0 0 1px var(--paper);
+  cursor: pointer;
+}
+
+.timeline__mark:hover {
+  z-index: 1;
+  box-shadow:
+    0 0 0 1px var(--paper),
+    0 0 0 3px var(--ink);
+}
+
+.timeline__mark:focus-visible {
+  z-index: 2;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.timeline__mark--muted {
+  opacity: 0.18;
+}
+
+.timeline__mark--selected {
+  z-index: 2;
+  box-shadow:
+    0 0 0 2px var(--paper),
+    0 0 0 4px var(--ink);
+}
+
+.timeline__tip {
+  position: absolute;
+  z-index: 3;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 220px;
+  padding: 5px 9px 6px;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  background: var(--paper);
+  box-shadow: 2px 2px 0 var(--ink-shadow);
+  font-size: 13px;
+  line-height: 1.25;
+  text-align: center;
+  transform: translateX(-50%);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.timeline__tip--visible {
+  visibility: visible;
+}
+
+.timeline__tip-title {
+  display: block;
+  font-weight: 700;
+}
+
+.timeline__tip-when {
+  display: block;
+  color: var(--ink-soft);
+}
+
+.timeline__axis {
+  position: relative;
+  height: 28px;
+}
+
+.timeline__tick {
+  position: absolute;
+  top: 6px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+/* Засечка на оси над подписью */
+.timeline__tick::before {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 1px;
+  height: 5px;
+  background: var(--ink);
+  content: "";
+}
+
+/* Дата выбранного события прямо на оси, как отметка на линейке */
+.timeline__reading {
+  position: absolute;
+  top: 3px;
+  z-index: 1;
+  padding: 2px 8px 3px;
+  border-radius: 4px;
+  background: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--paper);
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 860px) {
+  /* Пояснение про обратный счёт на телефоне занимает три строки
+     и выталкивает ленту за экран */
+  .timeline__note--extra {
+    display: none;
+  }
+}
+
+/* Под палец область нажатия у метки шире самой метки: на 2 пикселя во все
+   стороны. Больше нельзя — соседние области начнут перекрываться
+   (шаг между метками задан в js/timeline/timeline.js) */
+@media (pointer: coarse) {
+  .timeline__mark::before {
+    position: absolute;
+    inset: -2px;
+    content: "";
+  }
+}

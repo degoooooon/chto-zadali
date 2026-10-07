@@ -1,0 +1,161 @@
+/* Точка места на карте. Кнопка 28 пикселей прозрачная, это площадка
+   для пальца; сам кружок внутри неё меньше.
+   Размеры кружка, отступ и высота подписи повторены в js/map/markers.js
+   (DOT_RADIUS, LABEL_GAP, LABEL_HEIGHT): по ним скрипт решает, влезет ли
+   подпись. Меняешь размер здесь — поправь и там */
+
+.marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  /* Центр кнопки ставим в координату места */
+  margin: -14px 0 0 -14px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-text);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+/* display: grid выше перебивает браузерное правило для hidden,
+   и скрытые точки остались бы на карте */
+.marker[hidden] {
+  display: none;
+}
+
+.marker:hover,
+.marker:focus-visible {
+  z-index: 2;
+}
+
+.marker:focus-visible {
+  outline: none;
+}
+
+.marker--selected {
+  z-index: 3;
+}
+
+.marker__dot {
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  background: var(--era-color);
+  /* Тёмный ободок: жёлтая точка Египта без него теряется на белой суше */
+  box-shadow: 0 0 0 1px var(--ink);
+  transition: transform 0.15s ease-out;
+}
+
+.marker:hover .marker__dot {
+  transform: scale(1.2);
+}
+
+.marker:focus-visible .marker__dot {
+  box-shadow: 0 0 0 2px var(--ink), 0 0 0 5px var(--paper), 0 0 0 7px var(--ink);
+}
+
+/* Место с несколькими событиями: кольцо с числом внутри. Число стоит
+   на белом, а не на цвете раздела, иначе на жёлтом его не прочесть */
+.marker--many .marker__dot {
+  width: 22px;
+  height: 22px;
+  border: 4px solid var(--era-color);
+  background: var(--paper);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 14px;
+  text-align: center;
+}
+
+.marker--selected .marker__dot {
+  box-shadow: 0 0 0 2px var(--ink);
+  transform: scale(1.25);
+}
+
+.marker--selected::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  animation: marker-pulse 1.8s ease-out infinite;
+}
+
+.marker__label {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 12px);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 16px;
+  white-space: nowrap;
+  /* Белая кайма вокруг букв: подпись читается и на реке, и на берегу */
+  text-shadow:
+    1px 0 0 var(--paper),
+    -1px 0 0 var(--paper),
+    0 1px 0 var(--paper),
+    0 -1px 0 var(--paper),
+    0 0 4px var(--paper);
+  transform: translateY(-50%);
+  pointer-events: none;
+  /* visibility, а не display: скрытой подписи всё равно нужна ширина,
+     по ней скрипт решает, поместится ли она рядом с точкой */
+  visibility: hidden;
+}
+
+.marker--label-left .marker__label {
+  right: calc(50% + 12px);
+  left: auto;
+}
+
+.marker--labeled .marker__label,
+.marker:hover .marker__label,
+.marker:focus-visible .marker__label {
+  visibility: visible;
+}
+
+.marker--selected .marker__label {
+  left: calc(50% + 18px);
+  font-size: 14px;
+}
+
+.marker--selected.marker--label-left .marker__label {
+  right: calc(50% + 18px);
+  left: auto;
+}
+
+@keyframes marker-pulse {
+  from {
+    opacity: 0.8;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker__dot {
+    transition: none;
+  }
+
+  .marker--selected::after {
+    animation: none;
+    opacity: 0.5;
+    transform: scale(1.3);
+  }
+}

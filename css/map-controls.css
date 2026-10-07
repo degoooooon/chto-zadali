@@ -1,0 +1,45 @@
+.map-controls {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  gap: 6px;
+}
+
+.map-controls__button {
+  box-sizing: border-box;
+  min-width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  background: var(--paper);
+  font-family: var(--font-text);
+  font-size: 22px;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.map-controls__button:hover {
+  background: var(--grid);
+}
+
+.map-controls__button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.map-controls__button--wide {
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Под палец кнопки крупнее */
+@media (pointer: coarse) {
+  .map-controls__button {
+    min-width: 46px;
+    height: 46px;
+  }
+}

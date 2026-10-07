@@ -1,0 +1,43 @@
+/* Подписи на карте по правилам школьного атласа: вода — синим курсивом,
+   страны — прописными вразрядку */
+
+.map-label {
+  font-size: 13px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  /* Обводка рисуется под буквами и закрывает линии под подписью */
+  paint-order: stroke;
+  stroke-linejoin: round;
+  stroke-width: 3px;
+  pointer-events: none;
+}
+
+.map-label--hidden {
+  display: none;
+}
+
+.map-label--sea {
+  font-family: var(--font-title);
+  font-style: italic;
+  letter-spacing: 0.04em;
+  fill: var(--sea-ink);
+  stroke: var(--sea);
+}
+
+.map-label--river {
+  font-family: var(--font-title);
+  font-size: 12px;
+  font-style: italic;
+  fill: var(--sea-ink);
+  stroke: var(--paper);
+}
+
+.map-label--land {
+  font-family: var(--font-text);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  fill: var(--ink-faint);
+  stroke: var(--paper);
+}

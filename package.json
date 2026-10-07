@@ -1,0 +1,11 @@
+{
+  "name": "karta-drevnego-mira",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node tools/serve.mjs",
+    "build:map": "node tools/build-map.mjs",
+    "build:pages": "node tools/build-pages.mjs",
+    "check:terms": "node tools/check-terms.mjs"
+  }
+}

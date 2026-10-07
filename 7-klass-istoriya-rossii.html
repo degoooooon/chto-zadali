@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!-- Страница собрана: npm run build:pages. Правь tools/page-template.html и js/data/class-N/page.js, а не этот файл -->
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Россия в XVI—XVII веках: где и когда. История, 7 класс</title>
+  <meta name="description" content="Карта и лента времени по истории России для 7 класса: от Ивана Грозного до конца XVII века. Выбери параграф: где и когда всё происходило и как рассказать на «3», «4» и «5».">
+  <!-- Пустая иконка: без неё браузер сам запрашивает /favicon.ico и пишет в консоль 404 -->
+  <link rel="icon" href="data:,">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Neucha&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/page.css">
+  <link rel="stylesheet" href="css/era.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/class-nav.css">
+  <link rel="stylesheet" href="css/legend.css">
+  <link rel="stylesheet" href="css/map.css">
+  <link rel="stylesheet" href="css/map-label.css">
+  <link rel="stylesheet" href="css/marker.css">
+  <link rel="stylesheet" href="css/map-controls.css">
+  <link rel="stylesheet" href="css/locator.css">
+  <link rel="stylesheet" href="css/card.css">
+  <link rel="stylesheet" href="css/chooser.css">
+  <link rel="stylesheet" href="css/answer.css">
+  <link rel="stylesheet" href="css/word-tip.css">
+  <link rel="stylesheet" href="css/timeline.css">
+  <link rel="stylesheet" href="css/dates.css">
+  <link rel="stylesheet" href="css/footer.css">
+
+  <script type="module" src="js/pages/class-7-russia.js"></script>
+  <!-- Обычный скрипт: сработает и там, где модуль выше не запустился -->
+  <script src="js/boot-check.js" defer></script>
+</head>
+<body class="page">
+  <noscript>
+    <p class="page__notice">Для карты нужен JavaScript. Включите его в настройках браузера и обновите страницу.</p>
+  </noscript>
+
+  <div class="app app--choosing">
+    <header class="header app__header">
+      <div class="header__titles">
+        <h1 class="header__title">Русское царство: где и когда</h1>
+        <nav class="class-nav" aria-label="Класс и предмет">
+          <a class="class-nav__link" href="7-klass.html">← 7 класс</a>
+          <span class="class-nav__label">История</span>
+        </nav>
+      </div>
+      <div class="legend app__legend">
+        <p class="legend__label" id="legend-label">Показывать на карте:</p>
+        <ul class="legend__list" aria-labelledby="legend-label"></ul>
+      </div>
+    </header>
+
+    <section class="map app__map" aria-label="Карта России и её соседей в XVI—XVII веках">
+      <div class="map__viewport">
+        <div class="map__markers"></div>
+        <p class="map__status">Карта загружается…</p>
+      </div>
+      <p class="map__hint" hidden>Точки слиплись. Приблизь карту кнопкой «+» или двумя пальцами.</p>
+      <div class="locator"></div>
+      <div class="map-controls">
+        <button class="map-controls__button map-controls__button--wide" type="button" data-map-action="reset">Вся карта</button>
+        <button class="map-controls__button" type="button" data-map-action="out" aria-label="Отдалить">−</button>
+        <button class="map-controls__button" type="button" data-map-action="in" aria-label="Приблизить">+</button>
+      </div>
+    </section>
+
+    <article class="card app__card">
+      <div class="card__scroll">
+        <section class="chooser" aria-labelledby="chooser-title">
+          <h2 class="chooser__title" id="chooser-title">Что задали?</h2>
+          <p class="chooser__lead">Напиши номер параграфа. Карта покажет, где всё происходило, лента времени — когда, а здесь появится рассказ на «3», на «4» и на «5».</p>
+          <form class="chooser__form" novalidate>
+            <label class="chooser__label" for="paragraph-number">Параграф №</label>
+            <input class="chooser__input" id="paragraph-number" type="text" inputmode="numeric" autocomplete="off" maxlength="4" aria-describedby="paragraph-message">
+            <button class="chooser__submit" type="submit">Открыть</button>
+          </form>
+          <p class="chooser__message" id="paragraph-message" aria-live="polite"></p>
+          <h3 class="chooser__subtitle">Или выбери из списка</h3>
+          <div class="chooser__groups"></div>
+          <p class="chooser__note">«Без дат» — параграфы про занятия, веру, культуру и быт. Событий на карте у них нет, а пересказ на оценку есть.</p>
+          <button class="chooser__all" type="button">Смотреть все события по порядку</button>
+        </section>
+        <div class="card__body" aria-live="polite" hidden></div>
+        <section class="answer" aria-labelledby="answer-title" hidden>
+          <h3 class="answer__title" id="answer-title">Как рассказать на оценку</h3>
+          <div class="answer__grades" role="group" aria-label="На какую оценку рассказ">
+            <button class="answer__grade" type="button" data-grade="3">«3»</button>
+            <button class="answer__grade" type="button" data-grade="4">«4»</button>
+            <button class="answer__grade" type="button" data-grade="5">«5»</button>
+          </div>
+          <div class="answer__content" aria-live="polite"></div>
+          <p class="answer__note">Это общие школьные требования к устному ответу по истории. У учителя могут быть свои.</p>
+        </section>
+        <div class="card__after" hidden></div>
+      </div>
+      <div class="card__nav" hidden>
+        <button class="card__step card__step--back" type="button">← Раньше</button>
+        <span class="card__counter"></span>
+        <button class="card__step card__step--forward" type="button">Позже →</button>
+      </div>
+    </article>
+
+    <section class="timeline app__timeline" aria-labelledby="timeline-title">
+      <div class="timeline__head">
+        <h2 class="timeline__title" id="timeline-title">Лента времени</h2>
+        <p class="timeline__note">одна клетка — 5 лет</p>
+        <p class="timeline__note timeline__note--extra">что было раньше 1530 года, ищи на карте</p>
+      </div>
+      <div class="timeline__scroller"></div>
+    </section>
+  </div>
+
+  <details class="dates">
+    <summary class="dates__summary">Все даты списком</summary>
+    <div class="dates__scroller">
+      <table class="dates__table">
+        <thead class="dates__head">
+          <tr class="dates__row">
+            <th class="dates__heading" scope="col">Когда</th>
+            <th class="dates__heading" scope="col">Что произошло</th>
+            <th class="dates__heading" scope="col">Где</th>
+            <th class="dates__heading dates__heading--era" scope="col">Раздел</th>
+          </tr>
+        </thead>
+        <tbody class="dates__body"></tbody>
+      </table>
+    </div>
+  </details>
+
+  <footer class="footer">
+    <p class="footer__line">Даты, места и номера параграфов сверены с учебником «История России» для 7 класса (XVI — конец XVII века). В другом учебнике параграфы идут иначе, а некоторые даты могут отличаться.</p>
+    <p class="footer__line">Рассказы написаны своими словами, это не текст учебника. Контуры карты: Natural Earth, общественное достояние.</p>
+    <p class="footer__line">Сайт не спрашивает имён и ничего о вас не хранит. В браузере запоминается только выбранная оценка. Шрифты загружаются с сервера Google Fonts.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{{generatedNote}}
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{documentTitle}}</title>
+  <meta name="description" content="{{description}}">
+  <!-- Пустая иконка: без неё браузер сам запрашивает /favicon.ico и пишет в консоль 404 -->
+  <link rel="icon" href="data:,">
+
+{{fonts}}
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/page.css">
+  <link rel="stylesheet" href="css/hub.css">
+  <link rel="stylesheet" href="css/class-nav.css">
+  <link rel="stylesheet" href="css/class-list.css">
+  <link rel="stylesheet" href="css/subject-list.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <!-- Скриптов нет: страница выбора — это ссылки, она открывается и без JavaScript -->
+</head>
+<body class="page">
+  <div class="hub">
+    <main class="hub__sheet">
+{{crumbs}}
+      <h1 class="hub__title">{{title}}</h1>
+      <p class="hub__lead">{{lead}}</p>
+{{list}}
+    </main>
+    <footer class="footer">
+      <p class="footer__line">Рассказы на сайте написаны своими словами, это не текст учебника.</p>
+      <p class="footer__line">{{privacy}}</p>
+    </footer>
+  </div>
+</body>
+</html>

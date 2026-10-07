@@ -1,0 +1,67 @@
+/* Слово с подсказкой в тексте рассказа: подчёркнуто точками,
+   по нажатию под ним открывается объяснение */
+
+.word-tip {
+  /* Точка отсчёта для подсказки: она встаёт под своим словом.
+     Блок строчный, не inline-block: неделимый блок в строке браузер
+     отрывает от запятой после него (см. js/card/word-tip.js) */
+  position: relative;
+}
+
+/* Подчёркивание чернилами, а не красной ручкой:
+   красные точки под словом читаются как ошибка */
+.word-tip__word {
+  text-decoration: underline dotted var(--ink-soft);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.word-tip__word:hover,
+.word-tip__word[aria-expanded="true"] {
+  text-decoration-style: solid;
+  text-decoration-color: var(--ink);
+}
+
+.word-tip__word:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.word-tip__note {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  /* Подсказка лежит поверх следующих строк и подписей частей */
+  z-index: 1;
+  /* border-box: иначе к 260px прибавляются поля и рамка, выходит 287px,
+     а в колонке текста на экране 320px всего 276px */
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 260px;
+  margin-top: 6px;
+  /* Подсказку у нижнего края экрана страница докручивает сама
+     (js/card/word-tip.js). Без отступа она встаёт вплотную к краю */
+  scroll-margin: 12px;
+  padding: 8px 12px 10px;
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  box-shadow: 0 4px 12px var(--ink-shadow);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.word-tip__term,
+.word-tip__meaning {
+  display: block;
+}
+
+.word-tip__term {
+  font-weight: 700;
+}
+
+.word-tip__meaning {
+  color: var(--ink-soft);
+}

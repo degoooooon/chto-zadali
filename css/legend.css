@@ -1,0 +1,83 @@
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+/* display: flex выше перебивает браузерное правило для hidden */
+.legend[hidden] {
+  display: none;
+}
+
+.legend__label {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.legend__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legend__item {
+  flex: none;
+}
+
+.legend__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  padding: 4px 12px 4px 9px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--paper);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.legend__toggle:hover {
+  border-color: var(--ink);
+}
+
+.legend__toggle:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.legend__mark {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--era-color);
+  box-shadow: inset 0 0 0 1px var(--ink-edge);
+}
+
+.legend__toggle--off {
+  color: var(--ink-faint);
+  text-decoration: line-through;
+}
+
+.legend__toggle--off .legend__mark {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--ink-faint);
+}
+
+@media (max-width: 860px) {
+  /* На телефоне кнопки переносятся на новые строки. Раньше они шли одной
+     строкой с прокруткой вбок, и четырёх из шести никто не находил */
+  .legend__toggle {
+    min-height: 36px;
+    font-size: 13px;
+  }
+}

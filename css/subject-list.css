@@ -1,0 +1,63 @@
+/* Предметы на странице класса. Предметов будет много, поэтому сетка сама
+   решает, сколько карточек в ряду: от одной на телефоне до четырёх-пяти
+   на широком экране. Пустые места в ряду остаются пустыми (auto-fill):
+   иначе две карточки растянулись бы на всю ширину окна */
+
+.subject-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.subject-list__link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  box-sizing: border-box;
+  /* Четыре клетки листа, как и плитка класса (см. hub.css) */
+  min-height: 96px;
+  padding: 12px 18px;
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.subject-list__link:hover {
+  background: var(--grid);
+}
+
+.subject-list__link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.subject-list__name {
+  font-family: var(--font-title);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Какой именно учебник: у истории в одном классе их бывает два */
+.subject-list__book {
+  font-family: var(--font-hand);
+  font-size: 19px;
+  line-height: 1.2;
+  color: var(--pen-red);
+}
+
+@media (max-width: 860px) {
+  .subject-list {
+    gap: 12px;
+  }
+
+  .subject-list__link {
+    min-height: 72px;
+  }
+}
